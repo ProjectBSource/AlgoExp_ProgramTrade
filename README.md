@@ -5,6 +5,8 @@ Join the program trading plan of AlgoExp by using TG to reveice order message an
 # https://pypi.org/project/python-telegram/
 # https://telegra.ph/How-to-get-Telegram-APP-ID--API-HASH-05-27
 # https://docs.telethon.dev/en/stable/basic/quick-start.html
+# https://interactivebrokers.github.io/tws-api/connection.html#connect
+# https://pypi.org/project/ibapi/#files
 
 # Step to use this program
 1. ensure installed Python and added the path
