@@ -2,9 +2,9 @@ from TeleramMessageAPIConnection import TeleramMessageAPIConnection
 import Common 
 import time
 
-api_id = 21463150
-api_hash = 'eb755521625b4a8b40f3d9c07a208624'
-phonenumber = '85254944646'
+api_id = 123345
+api_hash = 'aaaabbbbcccceee'
+phonenumber = '85255559999'
 Common.initLogging(phonenumber)
 tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
 while(True):
