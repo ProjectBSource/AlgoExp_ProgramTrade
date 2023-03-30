@@ -12,6 +12,6 @@ tgAPIc.readMySelf()
 while(True):
     for message in tgAPIc.getMessage():
         Common.print_and_logging( "[" + str(message.id) + "]" + message.text )
-        #asyncio.run(tgAPIc.sendmessage('85264302639', message.text))
+        tgAPIc.sendMessage(phonenumber, message.text)
     print("-------------------------------------------------")
     time.sleep(1)
