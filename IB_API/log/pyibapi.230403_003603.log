@@ -1,0 +1,23 @@
+(MainThread) 230403_00:36:03.755 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:hfarm
+(MainThread) 230403_00:36:03.756 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:eufarmnj
+(MainThread) 230403_00:36:03.756 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:cashfarm
+(MainThread) 230403_00:36:03.756 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:usfuture
+(MainThread) 230403_00:36:03.756 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:jfarm
+(MainThread) 230403_00:36:03.756 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:usfarm.nj
+(MainThread) 230403_00:36:03.757 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:eufarm
+(MainThread) 230403_00:36:03.757 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:usopt
+(MainThread) 230403_00:36:03.758 ERROR wrapper.py:57 ERROR -1 2104 Market data farm connection is OK:usfarm
+(MainThread) 230403_00:36:03.758 ERROR wrapper.py:57 ERROR -1 2106 HMDS data farm connection is OK:euhmds
+(MainThread) 230403_00:36:03.758 ERROR wrapper.py:57 ERROR -1 2106 HMDS data farm connection is OK:hkhmds
+(MainThread) 230403_00:36:03.758 ERROR wrapper.py:57 ERROR -1 2106 HMDS data farm connection is OK:cashhmds
+(MainThread) 230403_00:36:03.758 ERROR wrapper.py:57 ERROR -1 2106 HMDS data farm connection is OK:fundfarm
+(MainThread) 230403_00:36:03.759 ERROR wrapper.py:57 ERROR -1 2106 HMDS data farm connection is OK:ushmds
+(MainThread) 230403_00:36:03.759 ERROR wrapper.py:57 ERROR -1 2158 Sec-def data farm connection is OK:secdefnj
+(MainThread) 230403_00:36:04.189 ERROR wrapper.py:57 ERROR 2757 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.199 ERROR wrapper.py:57 ERROR 2755 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.241 ERROR wrapper.py:57 ERROR 2776 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.252 ERROR wrapper.py:57 ERROR 2777 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.268 ERROR wrapper.py:57 ERROR 2778 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.270 ERROR wrapper.py:57 ERROR 2750 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.271 ERROR wrapper.py:57 ERROR 2756 202 Order Canceled - reason:
+(MainThread) 230403_00:36:04.273 ERROR wrapper.py:57 ERROR 2781 202 Order Canceled - reason:

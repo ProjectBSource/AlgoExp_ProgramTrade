@@ -1,0 +1,20 @@
+(MainThread) 230401_20:51:37.101 ERROR wrapper.py:57 ERROR -1 2110 Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+(MainThread) 230401_20:51:37.102 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:usfarm.nj
+(MainThread) 230401_20:51:37.103 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:hfarm
+(MainThread) 230401_20:51:37.103 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:jfarm
+(MainThread) 230401_20:51:37.103 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:usfuture
+(MainThread) 230401_20:51:37.104 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:cashfarm
+(MainThread) 230401_20:51:37.104 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:eufarmnj
+(MainThread) 230401_20:51:37.104 ERROR wrapper.py:57 ERROR -1 2103 Market data farm connection is broken:usfarm
+(MainThread) 230401_20:51:37.105 ERROR wrapper.py:57 ERROR -1 2105 HMDS data farm connection is broken:euhmds
+(MainThread) 230401_20:51:37.105 ERROR wrapper.py:57 ERROR -1 2105 HMDS data farm connection is broken:cashhmds
+(MainThread) 230401_20:51:37.105 ERROR wrapper.py:57 ERROR -1 2105 HMDS data farm connection is broken:fundfarm
+(MainThread) 230401_20:51:37.106 ERROR wrapper.py:57 ERROR -1 2105 HMDS data farm connection is broken:ushmds
+(MainThread) 230401_20:51:37.106 ERROR wrapper.py:57 ERROR -1 2157 Sec-def data farm connection is broken:secdefnj
+(MainThread) 230401_20:51:40.922 ERROR wrapper.py:57 ERROR 210 200 No security definition has been found for the request
+(MainThread) 230401_20:51:40.923 ERROR wrapper.py:57 ERROR 211 200 No security definition has been found for the request
+(MainThread) 230401_20:51:40.928 ERROR wrapper.py:57 ERROR 214 200 No security definition has been found for the request
+(MainThread) 230401_20:51:41.021 ERROR wrapper.py:57 ERROR 215 200 No security definition has been found for the request
+(MainThread) 230401_20:51:41.022 ERROR wrapper.py:57 ERROR 216 200 No security definition has been found for the request
+(MainThread) 230401_20:51:41.122 ERROR wrapper.py:57 ERROR 217 200 No security definition has been found for the request
+(MainThread) 230401_20:51:41.225 ERROR wrapper.py:57 ERROR 218 10159 Failed to request matching symbols:Error sending message to a CCP.
