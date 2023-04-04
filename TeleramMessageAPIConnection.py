@@ -13,6 +13,7 @@ class TeleramMessageAPIConnection:
     messageList = []
     receive_msg_asyncio = None
     readmyself = False
+    listTheClient = False
     sendmessage = False
     sendmessage_msg = None
     sendmessage_trg = None
@@ -48,6 +49,9 @@ class TeleramMessageAPIConnection:
                 if self.readmyself==True:
                     self.client.loop.run_until_complete(self.readMySelf_process())
                     self.readmyself = False
+                if self.listTheClient==True:
+                    self.client.loop.run_until_complete(self.listTheClient_process())
+                    self.listTheClient = False
                 if self.sendmessage==True:
                     self.client.loop.run_until_complete(self.sendmessage_process())
                     self.sendmessage = False
@@ -58,7 +62,7 @@ class TeleramMessageAPIConnection:
 
     ############################################################################################################
     async def receiveMessage(self):
-        async for message in self.client.iter_messages('me'):
+        async for message in self.client.iter_messages('AlgoExp Signal'):
             with open('AlreadyReadMessageID', 'r') as file:
                 contents = file.read()
                 if str(message.id) not in contents:
@@ -73,6 +77,13 @@ class TeleramMessageAPIConnection:
 
 
     ############################################################################################################
+    def listTheClient(self):
+        self.listTheClient = True
+    async def listTheClient_process(self):
+        async for dialog in self.client.iter_dialogs():
+            print(dialog.name, 'has ID', dialog.id)
+
+    ############################################################################################################        
     def sendMessage(self, target, message):
         if(target is not None and message is not None):
             self.sendmessage = True
@@ -81,3 +92,4 @@ class TeleramMessageAPIConnection:
     async def sendmessage_process(self):
         await self.client.send_message(self.sendmessage_trg, self.sendmessage_msg)
     ############################################################################################################
+    
