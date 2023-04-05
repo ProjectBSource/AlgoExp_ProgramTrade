@@ -63,6 +63,7 @@ class TeleramMessageAPIConnection:
     ############################################################################################################
     async def receiveMessage(self):
         async for message in self.client.iter_messages('AlgoExp Signal'):
+        #async for message in self.client.iter_messages('me'):
             with open('AlreadyReadMessageID', 'r') as file:
                 contents = file.read()
                 if str(message.id) not in contents:
