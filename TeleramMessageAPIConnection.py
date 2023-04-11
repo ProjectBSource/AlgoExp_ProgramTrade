@@ -58,7 +58,7 @@ class TeleramMessageAPIConnection:
                     self.sendmessage_trg = None
                     self.sendmessage_msg = None
                 self.client.loop.run_until_complete(self.receiveMessage())
-                time.sleep(1)
+                time.sleep(0.1)
 
     ############################################################################################################
     async def receiveMessage(self):
