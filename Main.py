@@ -13,6 +13,7 @@ tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
 tgAPIc.readMySelf()
 tgAPIc.listTheClient()
+heartbeatCount = 1
 while(True):
     for message in tgAPIc.getMessage():
         if(message.id is not None and message.text is not None):
@@ -34,5 +35,8 @@ while(True):
                 ibTrade.app.AlgoExpSignalStrategy('202304', qty, price, action)
                 
             tgAPIc.sendMessage(phonenumber, message_for_IB_trade)
-    print(str(datetime.now()) + "-------------------------------------------------")
-    time.sleep(1)
+    if(heartbeatCount>=10):
+        print(str(datetime.now()) + "-------------------------------------------------")
+        heartbeatCount = 1
+    time.sleep(0.1)
+    heartbeatCount = heartbeatCount + 1
