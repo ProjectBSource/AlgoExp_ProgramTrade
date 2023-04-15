@@ -197,7 +197,7 @@ class TestApp(TestWrapper, TestClient):
     '''
     Patrick customize *****************************************************************************************************************
     '''
-    def AlgoExpSignalStrategy(self, contractYYYYMM, qty, price, action):
+    def AlgoExpSignalStrategy(self, contractYYYYMM, qty, price, action, orderType):
         contract = Contract()
         contract.symbol = "MHI"
         contract.secType = "FUT"
@@ -206,10 +206,29 @@ class TestApp(TestWrapper, TestClient):
         contract.lastTradeDateOrContractMonth = contractYYYYMM
         
         order = Order()
-        order.action = action
-        order.orderType = "LMT"
-        order.totalQuantity = qty
-        order.lmtPrice = price
+        if(orderType=="LimitOrder"):
+            order.action = action
+            order.orderType = "LMT"
+            order.totalQuantity = qty
+            order.lmtPrice = price
+        elif(orderType=="StopLimit"):
+            order.action = action
+            order.orderType = "STP LMT"
+            order.totalQuantity = qty
+            if(action=="BUY"):
+                order.lmtPrice = price + 1
+                order.auxPrice = price - 1
+            if(action=="SELL"):
+                order.lmtPrice = price - 1
+                order.auxPrice = price + 1
+        elif(orderType=="MarketToLimit"):
+            order.action = action
+            order.orderType = "MTL"
+            order.totalQuantity = qty
+        elif(orderType=="MarketOrder"):
+            order.action = action
+            order.orderType = "MKT"
+            order.totalQuantity = qty
         
         self.placeOrder(self.nextOrderId(), contract, order)
     '''

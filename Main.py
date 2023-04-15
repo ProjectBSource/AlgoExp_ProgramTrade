@@ -8,6 +8,7 @@ from datetime import datetime
 api_id = 21463150
 api_hash = 'eb755521625b4a8b40f3d9c07a208624'
 phonenumber = '85254944646'
+contract_YYYYMM = "202304"
 Common.initLogging(phonenumber)
 tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
@@ -31,7 +32,10 @@ while(True):
                 if("Close_Put" in message.text):
                     action = "BUY"
                 message_for_IB_trade = "{} {} MHI@{} ".format(action, str(qty), str(price))
-                ibTrade.app.AlgoExpSignalStrategy('202304', qty, price, action)
+                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOder")
+                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "StopLimit")
+                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
+                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
                 
             tgAPIc.sendMessage(phonenumber, message_for_IB_trade)
     print(str(datetime.now()) + "-------------------------------------------------")
