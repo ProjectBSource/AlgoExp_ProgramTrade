@@ -3,6 +3,10 @@ import threading
 import asyncio
 import numpy as np
 from telethon import TelegramClient
+import logging
+from datetime import datetime
+import os
+import sys
 
 
 class TeleramMessageAPIConnection:
@@ -22,10 +26,10 @@ class TeleramMessageAPIConnection:
         self.api_id = api_id
         self.api_hash = api_hash
         self.phone_number = phone_number
-        self.client = TelegramClient(phone_number, self.api_id, self.api_hash)
-        t = threading.Thread(target = self.run)
-        t.start()
-
+        self.client = TelegramClient(self.phone_number, self.api_id, self.api_hash)
+        self.t = threading.Thread(target = self.run)
+        self.t.start()
+       
     ############################################################################################################
     def getMessage(self):
         if(len(self.messageList)>0):
@@ -58,17 +62,24 @@ class TeleramMessageAPIConnection:
                     self.sendmessage_trg = None
                     self.sendmessage_msg = None
                 self.client.loop.run_until_complete(self.receiveMessage())
-                time.sleep(1)
+                time.sleep(2)
+                print(str(datetime.now()) + "------------- heartbeat from TeleramMessageAPIConnection")
 
     ############################################################################################################
     async def receiveMessage(self):
-        async for message in self.client.iter_messages('AlgoExp Signal'):
-        #async for message in self.client.iter_messages('me'):
-            with open('AlreadyReadMessageID', 'r') as file:
-                contents = file.read()
-                if str(message.id) not in contents:
-                    self.messageList.append(message)
-
+        try:
+            async for dialog in self.client.iter_dialogs():
+              if dialog.is_channel:
+                  if(dialog.title=='AlgoExp Signal'):
+                    async for message in self.client.iter_messages(dialog):
+                        if(message.id is not None and message.text is not None):
+                            with open('AlreadyReadMessageID', 'r') as file:
+                                contents = file.read()
+                                if str(message.id) not in contents:
+                                    self.messageList.append(message)
+        except Exception as e:
+            print("TeleramMessageAPIConnection - run encounter error: ", e)
+            
     ############################################################################################################
     def readMySelf(self):
         self.readmyself = True

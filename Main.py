@@ -10,8 +10,8 @@ api_hash = 'eb755521625b4a8b40f3d9c07a208624'
 phonenumber = '85254944646'
 contract_YYYYMM = "202304"
 Common.initLogging(phonenumber)
-tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
+tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
 tgAPIc.readMySelf()
 tgAPIc.listTheClient()
 while(True):
@@ -38,5 +38,5 @@ while(True):
                 ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
                 
             tgAPIc.sendMessage(phonenumber, message_for_IB_trade)
-    print(str(datetime.now()) + "-------------------------------------------------")
-    time.sleep(1)
+    print(str(datetime.now()) + "------------- heartbeat from Main")
+    time.sleep(0.1)
