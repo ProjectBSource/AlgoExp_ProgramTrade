@@ -3,6 +3,7 @@ from TeleramMessageAPIConnection import TeleramMessageAPIConnection
 import Common 
 import time
 import asyncio
+import sys
 from datetime import datetime
 
 api_id = 21463150
@@ -32,6 +33,11 @@ while(True):
                 if("Close_Put" in message.text):
                     action = "BUY"
     print(str(datetime.now()) + "------------- heartbeat from Main")
+    
+    with open('AlreadyReadMessageID', 'r') as file:
+        contents = file.read()
+        if len(contents) > 0:
+            print('initial finished')
+            sys.exit(0)
+            break
     time.sleep(0.1)
-    break
-sys.exit(0)
