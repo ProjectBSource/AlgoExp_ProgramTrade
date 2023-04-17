@@ -31,12 +31,7 @@ while(True):
                     action = "SELL"
                 if("Close_Put" in message.text):
                     action = "BUY"
-                message_for_IB_trade = "{} {} MHI@{} ".format(action, str(qty), str(price))
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "StopLimit")
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
-                
-            tgAPIc.sendMessage(phonenumber, message_for_IB_trade)
     print(str(datetime.now()) + "------------- heartbeat from Main")
     time.sleep(0.1)
+    break
+sys.exit(0)
