@@ -16,4 +16,5 @@ Join the program trading plan of AlgoExp by using TG to reveice order message an
 4. run command: pip install threaded
 5. run command: pip install numpy
 6. run command: pip install Telethon
-7. run command: python Main.py
+7. run command: pip install os-sys
+8. run command: python Main.py
