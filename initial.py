@@ -26,12 +26,24 @@ while(True):
                 qty = 1
                 if("Strategy1_call" in message.text):
                     action = "BUY"
+                    with open("TempOnHold", "w") as file:
+                        file.write("{},{},{} ".format("BUY",str(qty)))
+                        file.close()
                 if("Strategy1_Put" in message.text):
                     action = "SELL"
+                    with open("TempOnHold", "w") as file:
+                        file.write("{},{},{} ".format("SELL",str(qty)))
+                        file.close()
                 if("Close_call" in message.text):
                     action = "SELL"
+                    with open("TempOnHold", "w") as file:
+                        file.write("")
+                        file.close()
                 if("Close_Put" in message.text):
                     action = "BUY"
+                    with open("TempOnHold", "w") as file:
+                        file.write("")
+                        file.close()
     print(str(datetime.now()) + "------------- heartbeat from Main")
     
     with open('AlreadyReadMessageID', 'r') as file:
