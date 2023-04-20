@@ -21,6 +21,7 @@ class TeleramMessageAPIConnection:
     sendmessage = False
     sendmessage_msg = None
     sendmessage_trg = None
+    stopThread = False
 
     def __init__(self, api_id, api_hash, phone_number):
         self.api_id = api_id
@@ -29,6 +30,9 @@ class TeleramMessageAPIConnection:
         self.client = TelegramClient(self.phone_number, self.api_id, self.api_hash)
         self.t = threading.Thread(target = self.run)
         self.t.start()
+        
+    def stop(self):
+        self. stopThread = True       
        
     ############################################################################################################
     def getMessage(self):
@@ -49,7 +53,7 @@ class TeleramMessageAPIConnection:
         self.receive_msg_asyncio = asyncio.new_event_loop()
         asyncio.set_event_loop(self.receive_msg_asyncio)
         with self.client:
-            while(True):
+            while(self.stopThread==False):
                 if self.readmyself==True:
                     self.client.loop.run_until_complete(self.readMySelf_process())
                     self.readmyself = False
