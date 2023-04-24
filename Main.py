@@ -43,14 +43,14 @@ while(True):
                         file.write("{},{}".format("Strategy1_Put",str(qty)))
                         file.close()
                 if("Close_call" in message.text):
-                    if(still_onHold==False):
+                    if(still_onHold==True):
                         continue
                     action = "SELL"
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
                 if("Close_Put" in message.text):
-                    if(still_onHold==False):
+                    if(still_onHold==True):
                         continue
                     action = "BUY"
                     with open("TempOnHold", "w") as file:
@@ -67,7 +67,7 @@ while(True):
     ###################################################################################
     #force close all on 02:50 am
     ###################################################################################
-    if(datetime.now().time() >= time(2,50) ):
+    if(datetime.now().time() > time(2,50) and datetime.now().time() < time(2,51)):
         action = None
         price = None
         qty = None
@@ -88,14 +88,6 @@ while(True):
             with open("TempOnHold", "w") as file:
                 file.write("")
                 file.close()
-    ###################################################################################
-    ###################################################################################
-    
-    ###################################################################################
-    #force shutdown at 03:00 am
-    if(datetime.now().time() >= time(3,0) and  datetime.now().time() <= time(3,1)):
-        tgAPIc.stop()
-        sys.exit(1)
     ###################################################################################
     ###################################################################################
 
