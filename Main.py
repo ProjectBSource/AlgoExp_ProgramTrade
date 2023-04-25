@@ -43,14 +43,14 @@ while(True):
                         file.write("{},{}".format("Strategy1_Put",str(qty)))
                         file.close()
                 if("Close_call" in message.text):
-                    if(still_onHold==True):
+                    if(still_onHold==False):
                         continue
                     action = "SELL"
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
                 if("Close_Put" in message.text):
-                    if(still_onHold==True):
+                    if(still_onHold==False):
                         continue
                     action = "BUY"
                     with open("TempOnHold", "w") as file:
