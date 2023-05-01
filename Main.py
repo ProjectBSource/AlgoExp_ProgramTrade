@@ -11,7 +11,7 @@ from time import sleep
 api_id = 21463150
 api_hash = 'eb755521625b4a8b40f3d9c07a208624'
 phonenumber = '85254944646'
-contract_YYYYMM = "202304"
+contract_YYYYMM = "202305"
 Common.initLogging(phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
 tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
@@ -58,16 +58,16 @@ while(True):
                         file.close()
                 message_for_IB_trade = "{} {} MHI@{} ".format(action, str(qty), str(price))
                 ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "StopLimit")
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
+                #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "StopLimit")
+                #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
+                #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
                 
             tgAPIc.sendMessage(phonenumber, message_for_IB_trade)
 
     ###################################################################################
     #force close all on 02:50 am
     ###################################################################################
-    if(datetime.now().time() > time(2,50) and datetime.now().time() < time(2,51)):
+    if(datetime.now().time() > time(2,50,50) and datetime.now().time() < time(2,51)):
         action = None
         price = None
         qty = None
@@ -83,7 +83,7 @@ while(True):
                     qty = int(contents_array[1])
                 file.close()
             message_for_IB_trade = "{} {} MHI@{} ".format(action, str(qty), "Market price")
-            ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
+            #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
             ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
             with open("TempOnHold", "w") as file:
                 file.write("")
