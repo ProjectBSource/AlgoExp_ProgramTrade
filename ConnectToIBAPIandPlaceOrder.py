@@ -211,6 +211,7 @@ class TestApp(TestWrapper, TestClient):
             order.orderType = "LMT"
             order.totalQuantity = qty
             order.lmtPrice = price
+            self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="StopLimit"):
             order.action = action
             order.orderType = "STP LMT"
@@ -221,16 +222,40 @@ class TestApp(TestWrapper, TestClient):
             if(action=="SELL"):
                 order.lmtPrice = price - 1
                 order.auxPrice = price + 1
+            self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="MarketToLimit"):
             order.action = action
             order.orderType = "MTL"
             order.totalQuantity = qty
+            self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="MarketOrder"):
             order.action = action
             order.orderType = "MKT"
             order.totalQuantity = qty
+            self.placeOrder(self.nextOrderId(), contract, order)
+        elif(orderType=="BracketOrder_OnlyForProfits"):
+            #This will be our main or "parent" order
+            parent = Order()
+            parent.orderId = self.nextOrderId()
+            parent.action = action
+            parent.orderType = "LMT"
+            parent.totalQuantity = qty
+            parent.lmtPrice = price
+            #The parent and children orders will need this attribute set to False to prevent accidental executions.
+            #The LAST CHILD will have it set to True, 
+            parent.transmit = False
+            self.placeOrder(parent.orderId, contract, parent)
+
+            takeProfit = Order()
+            takeProfit.orderId = parent.orderId + 1
+            takeProfit.action = "SELL" if action == "BUY" else "BUY"
+            takeProfit.orderType = "LMT"
+            takeProfit.totalQuantity = qty
+            takeProfit.lmtPrice = price - 600 if action == "BUY" else price + 600
+            takeProfit.parentId = parent.orderId
+            takeProfit.transmit = True
+            self.placeOrder(takeProfit.orderId, contract, order)
         
-        self.placeOrder(self.nextOrderId(), contract, order)
     '''
     Patrick customize *****************************************************************************************************************
     '''
@@ -2001,7 +2026,7 @@ class ConnectToIBAPIandPlaceOrder:
         # cmdLineParser.add_option("-c", action="store_True", dest="use_cache", default = False, help = "use the cache")
         # cmdLineParser.add_option("-f", action="store", type="string", dest="file", default="", help="the input file")
         cmdLineParser.add_argument("-p", "--port", action="store", type=int,
-                                    dest="port", default=7496, help="The TCP port to use")
+                                    dest="port", default=7497, help="The TCP port to use")
         cmdLineParser.add_argument("-C", "--global-cancel", action="store_true",
                                     dest="global_cancel", default=False,
                                     help="whether to trigger a globalCancel req")

@@ -37,11 +37,13 @@ while(True):
                     with open("TempOnHold", "w") as file:
                         file.write("{},{}".format("Strategy1_call",str(qty)))
                         file.close()
+                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "BracketOrder_OnlyForProfits")
                 if("Strategy1_Put" in message.text):
                     action = "SELL"
                     with open("TempOnHold", "w") as file:
                         file.write("{},{}".format("Strategy1_Put",str(qty)))
                         file.close()
+                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "BracketOrder_OnlyForProfits")
                 if("Close_call" in message.text):
                     if(still_onHold==False):
                         continue
@@ -49,6 +51,7 @@ while(True):
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
+                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
                 if("Close_Put" in message.text):
                     if(still_onHold==False):
                         continue
@@ -56,8 +59,9 @@ while(True):
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
+                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
                 message_for_IB_trade = "{} {} MHI@{} ".format(action, str(qty), str(price))
-                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
+                #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
                 #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "StopLimit")
                 #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
                 #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
