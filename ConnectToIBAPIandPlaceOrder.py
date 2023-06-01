@@ -211,6 +211,8 @@ class TestApp(TestWrapper, TestClient):
             order.orderType = "LMT"
             order.totalQuantity = qty
             order.lmtPrice = price
+            order.transmit = True
+            order.outsideRth = True
             self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="StopLimit"):
             order.action = action
@@ -222,16 +224,22 @@ class TestApp(TestWrapper, TestClient):
             if(action=="SELL"):
                 order.lmtPrice = price - 1
                 order.auxPrice = price + 1
+            order.transmit = True
+            order.outsideRth = True
             self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="MarketToLimit"):
             order.action = action
             order.orderType = "MTL"
             order.totalQuantity = qty
+            order.transmit = True
+            order.outsideRth = True
             self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="MarketOrder"):
             order.action = action
             order.orderType = "MKT"
             order.totalQuantity = qty
+            order.transmit = True
+            order.outsideRth = True
             self.placeOrder(self.nextOrderId(), contract, order)
         elif(orderType=="BracketOrder_OnlyForProfits"):
             #This will be our main or "parent" order
@@ -2026,7 +2034,7 @@ class ConnectToIBAPIandPlaceOrder:
         # cmdLineParser.add_option("-c", action="store_True", dest="use_cache", default = False, help = "use the cache")
         # cmdLineParser.add_option("-f", action="store", type="string", dest="file", default="", help="the input file")
         cmdLineParser.add_argument("-p", "--port", action="store", type=int,
-                                    dest="port", default=7497, help="The TCP port to use")
+                                    dest="port", default=7496, help="The TCP port to use")
         cmdLineParser.add_argument("-C", "--global-cancel", action="store_true",
                                     dest="global_cancel", default=False,
                                     help="whether to trigger a globalCancel req")

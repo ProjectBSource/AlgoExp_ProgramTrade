@@ -11,7 +11,7 @@ from time import sleep
 api_id = 21463150
 api_hash = 'eb755521625b4a8b40f3d9c07a208624'
 phonenumber = '85254944646'
-contract_YYYYMM = "202305"
+contract_YYYYMM = "202306"
 Common.initLogging(phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
 tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
@@ -37,13 +37,11 @@ while(True):
                     with open("TempOnHold", "w") as file:
                         file.write("{},{}".format("Strategy1_call",str(qty)))
                         file.close()
-                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "BracketOrder_OnlyForProfits")
                 if("Strategy1_Put" in message.text):
                     action = "SELL"
                     with open("TempOnHold", "w") as file:
                         file.write("{},{}".format("Strategy1_Put",str(qty)))
                         file.close()
-                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "BracketOrder_OnlyForProfits")
                 if("Close_call" in message.text):
                     if(still_onHold==False):
                         continue
@@ -51,7 +49,6 @@ while(True):
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
-                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
                 if("Close_Put" in message.text):
                     if(still_onHold==False):
                         continue
@@ -59,9 +56,8 @@ while(True):
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
-                    ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
                 message_for_IB_trade = "{} {} MHI@{} ".format(action, str(qty), str(price))
-                #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
+                ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "LimitOrder")
                 #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "StopLimit")
                 #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketToLimit")
                 #ibTrade.app.AlgoExpSignalStrategy(contract_YYYYMM, qty, price, action, "MarketOrder")
@@ -71,7 +67,8 @@ while(True):
     ###################################################################################
     #force close all on 02:50 am
     ###################################################################################
-    if(datetime.now().time() > time(2,50,50) and datetime.now().time() < time(2,51)):
+    #if(datetime.now().time() > time(2,50,50) and datetime.now().time() < time(2,51)):
+    if(datetime.now().time() > time(2,30,00) and datetime.now().time() < time(2,31)):
         action = None
         price = None
         qty = None
