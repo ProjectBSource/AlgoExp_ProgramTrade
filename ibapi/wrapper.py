@@ -19,15 +19,16 @@ server and client.
 
 """
 
-from ibapi.common import * # @UnusedWildImport
-from ibapi.utils import * # @UnusedWildImport
-from ibapi.contract import (Contract, ContractDetails, DeltaNeutralContract)
+from datetime import datetime, time
+
+from ibapi.commission_report import CommissionReport
+from ibapi.common import *  # @UnusedWildImport
+from ibapi.contract import Contract, ContractDetails, DeltaNeutralContract
+from ibapi.execution import Execution
 from ibapi.order import Order
 from ibapi.order_state import OrderState
-from ibapi.execution import Execution
-from ibapi.ticktype import * # @UnusedWildImport
-from ibapi.commission_report import CommissionReport
-
+from ibapi.ticktype import *  # @UnusedWildImport
+from ibapi.utils import *  # @UnusedWildImport
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +44,7 @@ class EWrapper:
                 del prms['self']
             else:
                 prms = fnParams
-            logger.info("ANSWER %s %s", fnName, prms)
+            logger.info("%s ANSWER %s %s", datetime.now(), fnName, prms)
 
 
     def error(self, reqId:TickerId, errorCode:int, errorString:str, advancedOrderRejectJson = ""):
@@ -52,9 +53,9 @@ class EWrapper:
 
         self.logAnswer(current_fn_name(), vars())
         if advancedOrderRejectJson:
-            logger.error("ERROR %s %s %s %s", reqId, errorCode, errorString, advancedOrderRejectJson)
+            logger.error("%s ERROR %s %s %s %s", datetime.now(), reqId, errorCode, errorString, advancedOrderRejectJson)
         else: 
-            logger.error("ERROR %s %s %s", reqId, errorCode, errorString)
+            logger.error("%s ERROR %s %s %s", datetime.now(), reqId, errorCode, errorString)
 
     def winError(self, text:str, lastError:int):
         self.logAnswer(current_fn_name(), vars())

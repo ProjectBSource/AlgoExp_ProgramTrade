@@ -1,22 +1,30 @@
-from ConnectToIBAPIandPlaceOrder import ConnectToIBAPIandPlaceOrder
-from TeleramMessageAPIConnection import TeleramMessageAPIConnection
-import Common 
-import time
 import asyncio
 import sys
+import time
 from datetime import datetime, time
 from time import sleep
 
+import Common
+from ConnectToIBAPIandPlaceOrder import ConnectToIBAPIandPlaceOrder
+from TeleramMessageAPIConnection import TeleramMessageAPIConnection
 
 api_id = 21463150
 api_hash = 'eb755521625b4a8b40f3d9c07a208624'
 phonenumber = '85254944646'
-contract_YYYYMM = "202306"
+contract_YYYYMM = "202310"
 Common.initLogging(phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
 tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
 tgAPIc.readMySelf()
 tgAPIc.listTheClient()
+
+#clean onTemp file first
+if(datetime.now().time() > time(3,1,00) and datetime.now().time() < time(9,30)):
+    with open("TempOnHold", "w") as file:
+        file.write("")
+        file.close()
+    
+
 while(True):
     still_onHold = False
     with open('TempOnHold', 'r') as file:
@@ -34,11 +42,13 @@ while(True):
                 qty = 1
                 if("Strategy1_call" in message.text):
                     action = "BUY"
+                    price += 5
                     with open("TempOnHold", "w") as file:
                         file.write("{},{}".format("Strategy1_call",str(qty)))
                         file.close()
                 if("Strategy1_Put" in message.text):
                     action = "SELL"
+                    price -= 5
                     with open("TempOnHold", "w") as file:
                         file.write("{},{}".format("Strategy1_Put",str(qty)))
                         file.close()
@@ -46,6 +56,7 @@ while(True):
                     if(still_onHold==False):
                         continue
                     action = "SELL"
+                    price -= 5
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
@@ -53,6 +64,7 @@ while(True):
                     if(still_onHold==False):
                         continue
                     action = "BUY"
+                    price += 5
                     with open("TempOnHold", "w") as file:
                         file.write("")
                         file.close()
@@ -67,8 +79,7 @@ while(True):
     ###################################################################################
     #force close all on 02:50 am
     ###################################################################################
-    #if(datetime.now().time() > time(2,50,50) and datetime.now().time() < time(2,51)):
-    if(datetime.now().time() > time(2,30,00) and datetime.now().time() < time(2,31)):
+    if(datetime.now().time() > time(2,50,50) and datetime.now().time() < time(2,51)):
         action = None
         price = None
         qty = None
