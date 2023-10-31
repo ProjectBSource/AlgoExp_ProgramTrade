@@ -11,7 +11,7 @@ from TeleramMessageAPIConnection import TeleramMessageAPIConnection
 api_id = 21463150
 api_hash = 'eb755521625b4a8b40f3d9c07a208624'
 phonenumber = '85254944646'
-contract_YYYYMM = "202310"
+contract_YYYYMM = "202311"
 Common.initLogging(phonenumber)
 ibTrade = ConnectToIBAPIandPlaceOrder()
 tgAPIc = TeleramMessageAPIConnection(api_id, api_hash, phonenumber)
@@ -36,7 +36,7 @@ while(True):
         if(message.id is not None and message.text is not None):
             Common.print_and_logging( "[" + str(message.id) + "]" + message.text )
             message_for_IB_trade = None
-            if("**Algoexpsignal** [report]" in message.text):
+            if("**Algoexpsignal** [report" in message.text):
                 action = None
                 price = (int((message.text[message.text.find(" at ")+4:message.text.find(" on ")]).replace(",","")))
                 qty = 1
